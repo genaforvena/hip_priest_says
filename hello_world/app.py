@@ -85,9 +85,13 @@ async def async_process(event, context):
 
 def create_hood_knowledge_question(original_message):
     message_history = [
+        {"role": "user",
+         "content": "### INSTRUCTIONS ###" +
+                    custom_instructions +
+                    "Если ты понял, то ответь ХОРОШО."},
+        {"role": "assistant", "content": "ХОРОШО"},
         {"role": "user", "content": f"{original_message}"}]
 
     hoodified_message = (client.chat.completions.create(model="gpt-3.5-turbo-16k-0613",
-                                                        instructions=custom_instructions,
                                                         messages=message_history).choices[0].message.content)
     return hoodified_message

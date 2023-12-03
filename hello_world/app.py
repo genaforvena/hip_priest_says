@@ -54,7 +54,7 @@ async def async_process(event, context):
     chat_id = msg["chat"]["id"]
     if "text" not in msg:
         return {"statusCode": 200, "body": json.dumps({"message": "No text found"})}
-    text = msg["text"]
+    text = msg["text"].lower()
     hood_question = "No trigger words found"
     if any(word in text for word in trigger_words):
         print("text is " + text)
